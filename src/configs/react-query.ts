@@ -1,5 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 
+// P_TODO: 이거 프로바이더로 분리 예정
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
