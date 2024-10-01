@@ -1,5 +1,3 @@
-import withAppProvider from '@/hocs/withAppProvider';
-
 function App({ Component, pageProps }: any) {
   return (
     <>
@@ -8,4 +6,4 @@ function App({ Component, pageProps }: any) {
   );
 }
 
-export default withAppProvider(App);
+export default App;
