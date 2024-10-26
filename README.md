@@ -31,3 +31,22 @@ useMultipleKeyEventEffect({
 ```
 
 <br />
+
+### useAnimationFrame
+
+requestAnimationFrame을 보다 쉽게 사용하기 위한 hooks입니다.
+animationFrame은 일반 상태와 다르게 별도에 스레드에서 작동하므로 사용법을 익히고 사용해주세요.
+
+```ts
+const { animateFrame, cancelAnimateFrame } = useAnimationFrame({});
+
+useEffect(() => {
+  const startBallAnimation = () => {
+    animateFrame(() => {
+      // canvas 등 이벤트
+    });
+  };
+  cancelAnimateFrame();
+  startBallAnimation();
+}, []);
+```
