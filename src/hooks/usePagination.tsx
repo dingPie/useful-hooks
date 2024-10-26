@@ -33,7 +33,7 @@ export const usePagination = ({
     [total, pageSize],
   );
 
-  const pageButtonList = useMemo(
+  const totalPageButtonList = useMemo(
     () =>
       Array(pageButtonLength)
         .fill(0)
@@ -41,13 +41,13 @@ export const usePagination = ({
     [pageButtonLength],
   );
 
-  const renderPageButtonList = useMemo(
+  const pageButtonList = useMemo(
     () =>
-      pageButtonList.slice(
+      totalPageButtonList.slice(
         pageGroupIndex * buttonLimit,
         (pageGroupIndex + 1) * buttonLimit,
       ),
-    [pageButtonList, pageGroupIndex, buttonLimit],
+    [totalPageButtonList, pageGroupIndex, buttonLimit],
   );
 
   const isDisabledPrev = useMemo(() => pageNum <= 0, [pageNum]);
@@ -56,21 +56,21 @@ export const usePagination = ({
     [pageButtonLength, pageNum],
   );
 
-  const handleClickFirstPageButton = useCallback(() => {
+  const setFirst = useCallback(() => {
     setPageNum(0);
-  }, [buttonLimit, pageGroupIndex, setPageNum]);
+  }, [setPageNum]);
 
-  const handleClickLastPageButton = useCallback(() => {
+  const setLast = useCallback(() => {
     setPageNum(pageButtonLength - 1);
-  }, [buttonLimit, pageGroupIndex, setPageNum]);
+  }, [pageButtonLength, setPageNum]);
 
-  const handleClickPrevPageButton = useCallback(() => {
+  const setPrev = useCallback(() => {
     const nextPageNum =
       pageGroupIndex === 0 ? 0 : pageGroupIndex * buttonLimit - 1;
     setPageNum(nextPageNum);
   }, [buttonLimit, pageGroupIndex, setPageNum]);
 
-  const handleClickNextPageButton = useCallback(() => {
+  const setNext = useCallback(() => {
     const nextPageNum =
       pageGroupIndex === Math.floor(pageButtonLength / buttonLimit)
         ? pageButtonLength - 1
@@ -90,7 +90,7 @@ export const usePagination = ({
     /**
      * 렌더링할 페이지 넘버
      */
-    renderPageButtonList,
+    pageButtonList,
     /**
      * 이전, 처음 버튼 사용 가능여부
      */
@@ -102,18 +102,18 @@ export const usePagination = ({
     /**
      * 처음 페이지 선택
      */
-    handleClickFirstPageButton,
+    setFirst,
     /**
      * 마지막 페이지 선택
      */
-    handleClickLastPageButton,
+    setLast,
     /**
      * 이전버튼 클릭. 이전 페이지의 마지막 항목으로 이동합니다. (6~10 에서 눌렀을 때, 5로 이동 )
      */
-    handleClickPrevPageButton,
+    setPrev,
     /**
      * 다음버튼 선택. 이전 페이지의 마지막 항목으로 이동합니다. (1~5 에서 눌렀을 때, 6로 이동 )
      */
-    handleClickNextPageButton,
+    setNext,
   };
 };
