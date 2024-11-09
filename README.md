@@ -166,3 +166,29 @@ const contextModal = useContextModal();
         });
 
 ```
+
+<br />
+
+### useYieldLogic
+
+클라이언트에서 제어권을 넘겨 비동기로 동작하는 로직을 구현하기 위한 함수입니다.
+
+```ts
+
+const { endYield, startYield } = useYieldLogic();
+
+...
+
+const 이벤트_시작 = async() => {
+  if (안내모달표시) {
+    const result = await startYield();
+  }
+
+  // endYield 가 호출되면 아래 로직 실행됨
+}
+
+const 안내모달_확인 = async() => {
+  endYield('startYield에 값을 전달할 수 있습니다');
+}
+
+```
